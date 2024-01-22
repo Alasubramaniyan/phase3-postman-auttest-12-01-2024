@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "770a14fc-dff7-4498-86a3-1c690282224c",
+		"name": "1. REST API Test",
+		"description": "REST API Testing is a technique that is done by recording the response of the REST APIs by sending various HTTP requests to check the validity and working of the APIs for web applications. Instead of standard user input(like keyboards and output), we use software to send calls, obtain output and record the response. Automation testing of API needs an app that can interact through an API.\n\nA REST API acts as a contract between the client and the server(the client by making a request from the server for the response). So, before moving forward, our first duty should be checking the contract by inspecting the service. There should be no duplicate, and missing functionality and endpoints should be correctly named. Our first concern should be about the functionality of the API(whether it is working properly or not(without bugs)).  \n\nFor testing to be done, our application must interact with the sample API. API testing requires two things:\n\n- A tool or a framework to operate the API such as Advanced REST Client, Postman REST Client, or Curl in Linux.\n    \n- A tester writes the code to test the sample REST API.\n    \n\n### Different Ways of Testing REST APIs\n\n1. **Validation Testing:** It is considered as the assurance of the correct development and occurs at the final steps verifying the behavior and efficiency aspects of the product.\n    \n2. **Security Testing:** This is done to secure the API implementation from external threats. It also includes the design of the API access control, validation of encryption methodologies, and user rights management.\n    \n3. **UI Testing:** It focuses on the user interface for the API rather than testing the API itself.\n    \n4. **Functional Testing:** Particular functions in the codebase are included in the Functional Testing and handle the API Function in a planned manner.\n    \n5. **Load Testing:** It monitors whether the solution provided is working as planned or not and generally occurs after the whole codebase is completed.\n    \n6. **Runtime and Error Detection**: It mainly focuses on error detection, execution error, and monitoring and deals with the universal result of the API Codebase(as it is related to the actual running of the API).\n    \n7. **Penetration Testing:** It is involved in the auditing process as a second test.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32313461",
+		"_collection_link": "https://galactic-rocket-170977.postman.co/workspace/Dummy-Test~76a983b7-22c1-4b53-892e-d530f5a3a764/collection/32313461-770a14fc-dff7-4498-86a3-1c690282224c?action=share&source=collection_link&creator=32313461"
+	},
+	"item": [
+		{
+			"name": "Get All users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successfull Test 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get variable from different scope\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    var env_host_url = pm.environment.get(\"HOST_URL\");\r",
+							"    console.log(\"Env HOST_URL :: \", env_host_url);\r",
+							"\r",
+							"    var globals_host_url = pm.globals.get(\"HOST_URL\");\r",
+							"    console.log(\"Globals HOST_URL :: \", globals_host_url); \r",
+							"\r",
+							"    var local_var = pm.variables.get(\"HOST_URL\");\r",
+							"    console.log(\"Local HOST_URL :: \", local_var);  \r",
+							"\r",
+							"    var collection_var = pm.collectionVariables.get(\"URL\");\r",
+							"    console.log(\"Collection HOST_URL :: \", collection_var);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Set variable from different scope\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"\r",
+							"    pm.environment.set(\"HOST_ADDRESS\", \"https://www.simplilearn.com\");\r",
+							"    var env_host_url = pm.environment.get(\"HOST_ADDRESS\");\r",
+							"    console.log(\"Env HOST_ADDRESS :: \", env_host_url);\r",
+							"\r",
+							"    pm.globals.set(\"HOST_ADDRESS\", \"https://www.google.com\");\r",
+							"\r",
+							"    var globals_host_url = pm.globals.get(\"HOST_ADDRESS\");\r",
+							"    console.log(\"Globals HOST_ADDRESS :: \", globals_host_url); \r",
+							"\r",
+							"    pm.variables.set(\"HOST_ADDRESS\", \"https://www.amazon.in\");\r",
+							"\r",
+							"    var local_var = pm.variables.get(\"HOST_ADDRESS\");\r",
+							"    console.log(\"Local HOST_ADDRESS :: \", local_var);  \r",
+							"\r",
+							"    pm.collectionVariables.set(\"HOST_ADDRESS\", \"https://www.facebook.com\");\r",
+							"\r",
+							"    var collection_var = pm.collectionVariables.get(\"HOST_ADDRESS\");\r",
+							"    console.log(\"Collection HOST_ADDRESS :: \", collection_var);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST_URL}}/users?page={{PAGE}}&size={{SIZE}}&sort=acs&host_address={{HOST_ADDRESS}}",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "{{PAGE}}"
+						},
+						{
+							"key": "size",
+							"value": "{{SIZE}}"
+						},
+						{
+							"key": "sort",
+							"value": "acs"
+						},
+						{
+							"key": "host_address",
+							"value": "{{HOST_ADDRESS}}"
+						}
+					]
+				},
+				"description": "Retrieve a list of all users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get One user by userid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successfull Test 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get userid and should not be null\", function () {\r",
+							"    var userid = pm.collectionVariables.get(\"userid\");\r",
+							"    console.log(\"userid :: \", userid);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(userid).to.not.null;\r",
+							"    pm.expect(userid).to.equals(\"12\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST_URL}}/users/{{userid}}",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users",
+						"{{userid}}"
+					]
+				},
+				"description": "Retrieve a specific user by its userid."
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successfull Test 201 Created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get job title\", function () {\r",
+							"    var jobtitle = pm.variables.get(\"RANDOM_JOB_TITLE\");\r",
+							"    console.log(\"jobtitle\", jobtitle);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.job).to.not.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.variables.set(\"HOST_ADDRESS\", \"www.amazon.in\");\r",
+							"pm.variables.set(\"RANDOM_JOB_TITLE\", \"{{$randomJobTitle}}\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{HOST_ADDRESS}}\",\r\n    \"job\": \"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}/users",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Create a new user."
+			},
+			"response": []
+		},
+		{
+			"name": "Update user by userid",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"morpheus\",\r\n    \"job\": \"{{JOB_TITLE}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}/users/{{userid}}",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users",
+						"{{userid}}"
+					]
+				},
+				"description": "Update an existing user by matching userid,"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user by userid",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{HOST_URL}}/users/2",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				},
+				"description": "Delete an user by userid."
+			},
+			"response": []
+		},
+		{
+			"name": "Update user job by userid",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"job\": \"software tester\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}/users/2",
+					"host": [
+						"{{HOST_URL}}"
+					],
+					"path": [
+						"users",
+						"2"
+					]
+				},
+				"description": "Update a single job fields as small patch."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST_ADDRESS",
+			"value": ""
+		},
+		{
+			"key": "URL",
+			"value": "https://reqres.in/api",
+			"type": "string"
+		},
+		{
+			"key": "userid",
+			"value": "12"
+		}
+	]
+}

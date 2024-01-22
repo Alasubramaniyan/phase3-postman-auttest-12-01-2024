@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "9e063502-fcbd-4a9d-8c7d-80e6cdfd3ebd",
+		"name": "10. Data Driven Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32313461",
+		"_collection_link": "https://galactic-rocket-170977.postman.co/workspace/Dummy-Test~76a983b7-22c1-4b53-892e-d530f5a3a764/collection/32313461-9e063502-fcbd-4a9d-8c7d-80e6cdfd3ebd?action=share&source=collection_link&creator=32313461"
+	},
+	"item": [
+		{
+			"name": "Register User Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201 Created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var email = pm.variables.get(\"email\");\r",
+							"var password = pm.variables.get(\"password\");\r",
+							"\r",
+							"pm.test(\"Response to have 'email' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.json()).to.have.property('email');\r",
+							"    pm.expect(jsonData.email).to.eql(email);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response to have 'password' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.json()).to.have.property('password');\r",
+							"    pm.expect(jsonData.password).to.eql(password);\r",
+							"});\r",
+							"\r",
+							"// Validate that the response is json object\r",
+							"pm.test(\"Response is a json object\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"// Validate that the response has an arg object\r",
+							"pm.test(\"Response to have 'id' property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('id');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response to have 'createdAt' property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('createdAt');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"{{email}}\",\r\n    \"password\":\"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/register/preprod",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"register",
+						"preprod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create online post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201 Created\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var userid = pm.variables.get(\"userid\");\r",
+							"var title = pm.variables.get(\"title\");\r",
+							"var body = pm.variables.get(\"body\");\r",
+							"\r",
+							"pm.test(\"Response to have 'userid' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.json()).to.have.property('userid');\r",
+							"    pm.expect(jsonData.userid).to.eql(userid);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response to have 'title' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.json()).to.have.property('title');\r",
+							"    pm.expect(jsonData.title).to.eql(title);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response to have 'body' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.json()).to.have.property('body');\r",
+							"    pm.expect(jsonData.body).to.eql(body);\r",
+							"});\r",
+							"\r",
+							"// Validate that the response is json object\r",
+							"pm.test(\"Response is a json object\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							"// Validate that the response has an arg object\r",
+							"pm.test(\"Response to have 'id' property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('id');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userid\" : \"{{userid}}\",\r\n    \"title\" : \"{{title}}\",\r\n    \"body\" : \"{{body}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL2}}/posts",
+					"host": [
+						"{{BASE_URL2}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://reqres.in/api",
+			"type": "string"
+		},
+		{
+			"key": "BASE_URL2",
+			"value": "https://jsonplaceholder.typicode.com",
+			"type": "string"
+		}
+	]
+}
